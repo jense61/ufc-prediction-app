@@ -6,6 +6,8 @@ import { Navbar } from "@/components/navbar";
 import { prisma } from "@/lib/prisma";
 import "@/app/globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "UFC Prediction App",
   description: "Predict outcomes for numbered UFC events",
