@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  username     String       @unique
+  email        String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  totalScore   Int          @default(0)
+  predictions  Prediction[]
+
+  @@index([totalScore])
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  date        DateTime
+  location    String
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  fights      Fight[]
+
+  @@index([date])
+  @@index([isCompleted, date])
+}
+
+model Fight {
+  id             String       @id @default(cuid())
+  eventId        String
+  division       String
+  isTitleFight   Boolean      @default(false)
+  fighter1Name   String
+  fighter1Record String
+  fighter1Age    String
+  fighter1Height String
+  fighter1Reach  String
+  fighter2Name   String
+  fighter2Record String
+  fighter2Age    String
+  fighter2Height String
+  fighter2Reach  String
+  winner         String?
+  method         String?
+  isInvalidated  Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  event          Event        @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  predictions    Prediction[]
+
+  @@index([eventId])
+  @@index([winner])
+  @@index([isInvalidated])
+}
+
+model Prediction {
+  id              String   @id @default(cuid())
+  userId          String
+  fightId         String
+  predictedWinner String
+  createdAt       DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fight           Fight    @relation(fields: [fightId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, fightId])
+  @@index([userId])
+  @@index([fightId])
+}
+
+model AppState {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}

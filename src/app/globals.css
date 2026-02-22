@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ufc-black text-ufc-white antialiased;
+}
+
+.ufc-panel {
+  @apply border border-ufc-red/70 bg-zinc-900;
+}
+
+.ufc-button {
+  @apply rounded-none border border-ufc-red bg-ufc-red px-4 py-2 font-display text-sm uppercase tracking-wide text-ufc-white transition hover:bg-transparent;
+}
