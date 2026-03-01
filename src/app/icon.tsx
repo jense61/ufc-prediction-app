@@ -21,11 +21,12 @@ export default function Icon() {
           backgroundImage:
             "radial-gradient(120% 70% at 50% 100%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 60%), linear-gradient(180deg, #d11a28 0%, #b50f1c 100%)",
           color: "#0a0a0a",
-          fontSize: 96,
+          fontSize: 102,
           fontWeight: 900,
-          letterSpacing: -2,
+          letterSpacing: -6,
           fontStyle: "italic",
-          fontFamily: "Georgia"
+          textShadow: "0 1px 0 rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.35)",
+          fontFamily: "Times New Roman"
         }}
       >
         <div
@@ -33,8 +34,7 @@ export default function Icon() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            lineHeight: 0.92,
-            textTransform: "uppercase"
+            lineHeight: 0.86
           }}
         >
           <span>Fight</span>
