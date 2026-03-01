@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Route } from "next";
 import { getServerAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { normalizeName } from "@/lib/utils";
@@ -71,7 +72,7 @@ export default async function LeaderboardPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-zinc-400">Rank #{index + 1}</p>
-                  <Link href={`/leaderboard/${row.userId}`} className="mt-1 block text-lg font-semibold text-zinc-100 hover:text-ufc-red">
+                  <Link href={`/leaderboard/${row.userId}` as Route} className="mt-1 block text-lg font-semibold text-zinc-100 hover:text-ufc-red">
                     {row.username}
                   </Link>
                 </div>
@@ -97,7 +98,7 @@ export default async function LeaderboardPage() {
                 <tr key={row.userId} className="border-t border-zinc-800">
                   <td className="px-4 py-3">{index + 1}</td>
                   <td className="px-4 py-3 font-semibold">
-                    <Link href={`/leaderboard/${row.userId}`} className="hover:text-ufc-red">
+                    <Link href={`/leaderboard/${row.userId}` as Route} className="hover:text-ufc-red">
                       {row.username}
                     </Link>
                   </td>

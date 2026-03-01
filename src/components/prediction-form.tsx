@@ -155,7 +155,7 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
         </button>
       ) : null}
       {isLocked ? <p className="text-sm text-zinc-400">Predictions are locked 24 hours before event start.</p> : null}
-      {hasSubmittedState ? <p className="text-sm text-zinc-400">Your submitted picks are highlighted below.</p> : null}
+      {hasSubmittedState ? <p className="text-sm text-zinc-400">Your submitted picks are highlighted above.</p> : null}
     </div>
   );
 }
