@@ -59,9 +59,24 @@ export default async function LeaderboardPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="font-display text-4xl text-ufc-red">Leaderboard</h1>
+      <h1 className="font-display text-3xl text-ufc-red md:text-4xl">Leaderboard</h1>
       <p className="text-sm uppercase tracking-wide text-zinc-400">Season {currentYear}</p>
-      <div className="overflow-x-auto ufc-panel">
+      <div className="space-y-3 md:hidden">
+        {rows.map((row, index) => (
+          <div key={row.username} className="ufc-panel p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-zinc-400">Rank #{index + 1}</p>
+                <p className="mt-1 text-lg font-semibold text-zinc-100">{row.username}</p>
+              </div>
+              <p className="text-sm text-zinc-300">{row.accuracy.toFixed(2)}%</p>
+            </div>
+            <p className="mt-2 text-sm text-zinc-300">Correct picks: {row.correct}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden overflow-x-auto ufc-panel md:block">
         <table className="min-w-full">
           <thead className="bg-black/70 text-left text-xs uppercase tracking-wide text-zinc-400">
             <tr>

@@ -8,12 +8,12 @@ export function Navbar() {
 
   return (
     <nav className="border-b border-ufc-red/50 bg-black/50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="font-display text-xl text-ufc-red">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
+        <Link href="/" className="font-display text-lg leading-tight text-ufc-red sm:text-xl">
           UFC PREDICTIONS
         </Link>
 
-        <div className="flex items-center gap-4 text-sm uppercase tracking-wide">
+        <div className="flex w-full flex-wrap items-center justify-start gap-2 text-xs uppercase tracking-wide sm:w-auto sm:justify-end sm:gap-4 sm:text-sm">
           <Link href="/predictions" className="hover:text-ufc-red">
             Predictions
           </Link>
@@ -27,12 +27,12 @@ export function Navbar() {
           {data?.user ? (
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="border border-ufc-red px-3 py-1 hover:bg-ufc-red"
+              className="border border-ufc-red px-2 py-1 text-xs hover:bg-ufc-red sm:px-3 sm:text-sm"
             >
               Logout
             </button>
           ) : (
-            <Link href="/login" className="border border-ufc-red px-3 py-1 hover:bg-ufc-red">
+            <Link href="/login" className="border border-ufc-red px-2 py-1 text-xs hover:bg-ufc-red sm:px-3 sm:text-sm">
               Login
             </Link>
           )}

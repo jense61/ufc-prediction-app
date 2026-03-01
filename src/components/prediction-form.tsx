@@ -76,10 +76,10 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
     <div className="space-y-6">
       {fights.map((fight) => (
         <div key={fight.id} className="ufc-panel p-4">
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-semibold uppercase tracking-wide text-zinc-300">{fight.division}</p>
             {fight.isTitleFight ? (
-              <span className="border border-ufc-red px-2 py-1 text-xs uppercase text-ufc-red">Title Fight</span>
+              <span className="self-start border border-ufc-red px-2 py-1 text-xs uppercase text-ufc-red">Title Fight</span>
             ) : null}
           </div>
 
@@ -88,13 +88,13 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
               type="button"
               disabled={isLocked || hasSubmitted}
               onClick={() => onSelect(fight.id, fight.fighter1Name)}
-              className={`border p-4 text-left transition ${
+              className={`border p-3 text-left transition sm:p-4 ${
                 picks[fight.id] === fight.fighter1Name
                   ? "border-ufc-red bg-ufc-red/20"
                   : "border-zinc-700 hover:border-ufc-red"
               }`}
             >
-              <p className="text-xl font-bold">{fight.fighter1Name}</p>
+              <p className="break-words text-lg font-bold sm:text-xl">{fight.fighter1Name}</p>
               <p className="text-sm text-zinc-300">Record: {fight.fighter1Record}</p>
               <p className="text-sm text-zinc-300">Age: {fight.fighter1Age}</p>
               <p className="text-sm text-zinc-300">Height: {fight.fighter1Height}</p>
@@ -105,13 +105,13 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
               type="button"
               disabled={isLocked || hasSubmitted}
               onClick={() => onSelect(fight.id, fight.fighter2Name)}
-              className={`border p-4 text-left transition ${
+              className={`border p-3 text-left transition sm:p-4 ${
                 picks[fight.id] === fight.fighter2Name
                   ? "border-ufc-red bg-ufc-red/20"
                   : "border-zinc-700 hover:border-ufc-red"
               }`}
             >
-              <p className="text-xl font-bold">{fight.fighter2Name}</p>
+              <p className="break-words text-lg font-bold sm:text-xl">{fight.fighter2Name}</p>
               <p className="text-sm text-zinc-300">Record: {fight.fighter2Record}</p>
               <p className="text-sm text-zinc-300">Age: {fight.fighter2Age}</p>
               <p className="text-sm text-zinc-300">Height: {fight.fighter2Height}</p>

@@ -11,8 +11,8 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-8">
-      <section className="ufc-panel bg-gradient-to-r from-black via-zinc-900 to-black p-8">
-        <h1 className="font-display text-4xl uppercase text-ufc-red md:text-5xl">UFC Fight Pick League</h1>
+      <section className="ufc-panel bg-gradient-to-r from-black via-zinc-900 to-black p-5 sm:p-8">
+        <h1 className="font-display text-3xl uppercase text-ufc-red sm:text-4xl md:text-5xl">UFC Fight Pick League</h1>
         <p className="mt-3 max-w-2xl text-zinc-300">
           Predict main card outcomes for numbered UFC events. Lock your picks before fight night and compete on
           accuracy.
@@ -26,9 +26,9 @@ export default async function HomePage() {
 
       {event ? (
         <section className="grid gap-4 md:grid-cols-[2fr_1fr]">
-          <div className="ufc-panel p-6">
+          <div className="ufc-panel p-5 sm:p-6">
             <p className="text-xs uppercase text-zinc-400">Upcoming Numbered Event</p>
-            <h2 className="mt-2 font-display text-3xl text-ufc-red">{event.name}</h2>
+            <h2 className="mt-2 break-words font-display text-2xl text-ufc-red sm:text-3xl">{event.name}</h2>
             <p className="mt-2 text-zinc-300">{event.location}</p>
             <p className="mt-4 text-sm uppercase">Main Card Fights: {event.fights.length}</p>
           </div>

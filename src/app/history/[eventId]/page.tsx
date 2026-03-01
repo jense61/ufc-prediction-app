@@ -52,7 +52,7 @@ export default async function EventHistoryDetailPage({ params }: Props) {
       </Link>
 
       <div className="ufc-panel p-6">
-        <h1 className="font-display text-4xl text-ufc-red">{event.name}</h1>
+        <h1 className="break-words font-display text-3xl text-ufc-red md:text-4xl">{event.name}</h1>
         <p className="mt-2 text-zinc-300">{event.location}</p>
         <p className="mt-2 text-xs uppercase tracking-wide text-zinc-400">{event.isCompleted ? "Completed" : "Upcoming"}</p>
       </div>

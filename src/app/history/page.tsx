@@ -52,7 +52,7 @@ export default async function HistoryPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="font-display text-4xl text-ufc-red">Prediction History</h1>
+      <h1 className="font-display text-3xl text-ufc-red md:text-4xl">Prediction History</h1>
       <div className="space-y-4">
         {events.map((event) => {
           const picksCount = event.fights.reduce((total, fight) => total + fight.predictions.length, 0);
@@ -64,12 +64,12 @@ export default async function HistoryPage() {
 
           return (
             <Link key={event.id} href={`/history/${event.id}`} className="block ufc-panel p-5 transition hover:border-ufc-red">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="font-display text-2xl text-ufc-red">{event.name}</h2>
+                  <h2 className="break-words font-display text-2xl text-ufc-red">{event.name}</h2>
                   <p className="mt-1 text-zinc-300">{event.location}</p>
                 </div>
-                <div className="flex flex-col items-end gap-2">
+                <div className="flex flex-col gap-2 sm:items-end">
                   <p className="text-xs uppercase tracking-wide text-zinc-400">{event.isCompleted ? "Completed" : "Upcoming"}</p>
                   <span className="border border-zinc-700 px-2 py-1 text-xs uppercase tracking-wide text-zinc-200">
                     {event.isCompleted ? `${correctPicks}/${completedFights.length} Correct` : "Upcoming"}
