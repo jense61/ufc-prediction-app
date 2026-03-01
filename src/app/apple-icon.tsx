@@ -17,17 +17,27 @@ export default function AppleIcon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #000000 0%, #111111 100%)",
-          border: "8px solid #c1121f",
-          borderRadius: 36,
-          color: "#ffffff",
-          fontSize: 74,
+          background:
+            "radial-gradient(90% 45% at 50% 100%, rgba(255,255,255,0.55) 0%, rgba(90,90,90,0.45) 28%, rgba(0,0,0,1) 72%), #000000",
+          color: "#c1121f",
+          fontSize: 34,
           fontWeight: 900,
           letterSpacing: 2,
           fontFamily: "Arial"
         }}
       >
-        FP
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            lineHeight: 1.05,
+            textTransform: "uppercase"
+          }}
+        >
+          <span>Fight</span>
+          <span>Prophet</span>
+        </div>
       </div>
     ),
     size
