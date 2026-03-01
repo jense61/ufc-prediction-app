@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -24,14 +21,13 @@ export default function LoginPage() {
       password
     });
 
-    setLoading(false);
-
     if (!result || result.error) {
+      setLoading(false);
       setError("Invalid email or password.");
       return;
     }
 
-    router.push("/predictions");
+    window.location.assign("/predictions");
   };
 
   return (
