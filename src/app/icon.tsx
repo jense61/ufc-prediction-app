@@ -21,11 +21,12 @@ export default function Icon() {
           backgroundImage:
             "radial-gradient(120% 70% at 50% 100%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 60%), linear-gradient(180deg, #d11a28 0%, #b50f1c 100%)",
           color: "#0a0a0a",
-          fontSize: 102,
+          fontSize: 106,
           fontWeight: 900,
-          letterSpacing: -6,
+          letterSpacing: -7,
           fontStyle: "italic",
-          textShadow: "0 1px 0 rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.35)",
+          textShadow:
+            "0 1px 0 rgba(0,0,0,0.8), 0 2px 0 rgba(0,0,0,0.65), 1px 0 0 rgba(0,0,0,0.55), -1px 0 0 rgba(0,0,0,0.55)",
           fontFamily: "Times New Roman"
         }}
       >
@@ -34,7 +35,7 @@ export default function Icon() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            lineHeight: 0.86
+            lineHeight: 0.84
           }}
         >
           <span>Fight</span>
