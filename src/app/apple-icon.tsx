@@ -17,14 +17,15 @@ export default function AppleIcon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#000000",
+          backgroundColor: "#c1121f",
           backgroundImage:
-            "radial-gradient(90% 45% at 50% 100%, rgba(255,255,255,0.55) 0%, rgba(90,90,90,0.45) 28%, rgba(0,0,0,1) 72%)",
-          color: "#c1121f",
-          fontSize: 34,
+            "radial-gradient(120% 70% at 50% 100%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 60%), linear-gradient(180deg, #d11a28 0%, #b50f1c 100%)",
+          color: "#0a0a0a",
+          fontSize: 40,
           fontWeight: 900,
-          letterSpacing: 2,
-          fontFamily: "Arial"
+          letterSpacing: -1,
+          fontStyle: "italic",
+          fontFamily: "Georgia"
         }}
       >
         <div
@@ -32,7 +33,7 @@ export default function AppleIcon() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            lineHeight: 1.05,
+            lineHeight: 0.92,
             textTransform: "uppercase"
           }}
         >
