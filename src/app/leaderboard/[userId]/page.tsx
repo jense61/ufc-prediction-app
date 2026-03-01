@@ -104,7 +104,7 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
                   </span>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-zinc-400">{targetUser.username}'s picks: {picksCount}</p>
+              <p className="mt-3 text-sm text-zinc-400">{targetUser.username}&apos;s picks: {picksCount}</p>
             </Link>
           );
         })}

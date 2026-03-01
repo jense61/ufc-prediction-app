@@ -58,7 +58,7 @@ export default async function LeaderboardUserEventHistoryPage({ params }: Props)
   return (
     <section className="space-y-6">
       <Link href={`/leaderboard/${targetUser.id}` as Route} className="text-sm uppercase tracking-wide text-zinc-400 hover:text-ufc-red">
-        ← Back to {targetUser.username}'s History
+        ← Back to {targetUser.username}&apos;s History
       </Link>
 
       <div className="ufc-panel p-6">
