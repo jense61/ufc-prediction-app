@@ -73,23 +73,45 @@ export default async function LeaderboardUserEventHistoryPage({ params }: Props)
           const pick = fight.predictions[0]?.predictedWinner;
           const winner = fight.winner;
           const isCorrect = pick && winner && normalizeName(pick) === normalizeName(winner);
+          const pickedFighter1 = pick && normalizeName(pick) === normalizeName(fight.fighter1Name);
+          const pickedFighter2 = pick && normalizeName(pick) === normalizeName(fight.fighter2Name);
 
           return (
             <div key={fight.id} className="ufc-panel p-5">
-              <p className="text-sm uppercase tracking-wide text-zinc-400">{fight.division}</p>
-              <p className="mt-1 text-lg font-semibold">
-                {fight.fighter1Name} vs {fight.fighter2Name}
-              </p>
+              <div className="mb-4 flex items-center justify-between gap-2">
+                <p className="text-sm uppercase tracking-wide text-zinc-400">{fight.division}</p>
+                <p className="text-xs uppercase tracking-wide text-zinc-400">{pick ? `Pick: ${pick}` : "No pick"}</p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                <div
+                  className={`border p-4 text-left transition ${
+                    pickedFighter1 ? "border-ufc-red bg-ufc-red/20" : "border-zinc-700"
+                  }`}
+                >
+                  <p className="text-lg font-bold">{fight.fighter1Name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-zinc-400">{pickedFighter1 ? "Chosen by player" : "Not chosen"}</p>
+                </div>
+
+                <div
+                  className={`border p-4 text-left transition ${
+                    pickedFighter2 ? "border-ufc-red bg-ufc-red/20" : "border-zinc-700"
+                  }`}
+                >
+                  <p className="text-lg font-bold">{fight.fighter2Name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-zinc-400">{pickedFighter2 ? "Chosen by player" : "Not chosen"}</p>
+                </div>
+              </div>
 
               <div className="mt-4 grid gap-3 text-sm md:grid-cols-3">
                 <p>
-                  <span className="text-zinc-400">Player pick: </span>
-                  <span className="text-zinc-100">{pick ?? "No pick"}</span>
+                  <span className="text-zinc-400">Winner: </span>
+                  <span className="text-zinc-100">{event.isCompleted ? winner ?? "No winner" : "Pending"}</span>
                 </p>
 
                 <p>
-                  <span className="text-zinc-400">Winner: </span>
-                  <span className="text-zinc-100">{event.isCompleted ? winner ?? "No winner" : "Pending"}</span>
+                  <span className="text-zinc-400">Status: </span>
+                  <span className="text-zinc-100">{fight.isInvalidated ? "Invalidated" : "Valid"}</span>
                 </p>
 
                 <p>

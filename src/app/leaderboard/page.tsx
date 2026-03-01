@@ -61,8 +61,8 @@ export default async function LeaderboardPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="font-display text-3xl text-ufc-red md:text-4xl">Leaderboard</h1>
       <div className="ufc-panel space-y-4 p-4 sm:p-6">
+        <h1 className="font-display text-3xl text-ufc-red md:text-4xl">Leaderboard</h1>
         <p className="text-sm uppercase tracking-wide text-zinc-400">Season {currentYear}</p>
 
         <div className="space-y-3 md:hidden">

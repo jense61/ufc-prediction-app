@@ -81,10 +81,13 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
         {events.map((event) => {
           const picksCount = event.fights.reduce((total, fight) => total + fight.predictions.length, 0);
           const completedFights = event.fights.filter((fight) => fight.winner && !fight.isInvalidated);
+          const invalidatedFights = event.fights.filter((fight) => fight.isInvalidated).length;
           const correctPicks = completedFights.filter((fight) => {
             const pick = fight.predictions[0]?.predictedWinner;
             return pick && normalizeName(pick) === normalizeName(fight.winner ?? "");
           }).length;
+          const eventScore = correctPicks;
+          const accuracy = completedFights.length > 0 ? (correctPicks / completedFights.length) * 100 : 0;
 
           return (
             <Link
@@ -96,6 +99,13 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
                 <div>
                   <h2 className="break-words font-display text-2xl text-ufc-red">{event.name}</h2>
                   <p className="mt-1 text-zinc-300">{event.location}</p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-zinc-400">
+                    {event.date.toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric"
+                    })}
+                  </p>
                 </div>
                 <div className="flex flex-col gap-2 sm:items-end">
                   <p className="text-xs uppercase tracking-wide text-zinc-400">{event.isCompleted ? "Completed" : "Upcoming"}</p>
@@ -104,7 +114,13 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
                   </span>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-zinc-400">{targetUser.username}&apos;s picks: {picksCount}</p>
+
+              <div className="mt-4 grid gap-2 text-xs uppercase tracking-wide text-zinc-300 sm:grid-cols-4">
+                <p className="border border-zinc-800 px-2 py-2">Event score: {eventScore}</p>
+                <p className="border border-zinc-800 px-2 py-2">Picks made: {picksCount}</p>
+                <p className="border border-zinc-800 px-2 py-2">Accuracy: {accuracy.toFixed(1)}%</p>
+                <p className="border border-zinc-800 px-2 py-2">Invalid fights: {invalidatedFights}</p>
+              </div>
             </Link>
           );
         })}
