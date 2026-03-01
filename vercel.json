@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/monday",
+      "schedule": "0 8 * * 1"
+    },
+    {
+      "path": "/api/cron/sunday",
+      "schedule": "0 10 * * 0"
+    },
+    {
+      "path": "/api/cron/season-reset",
+      "schedule": "5 23 31 12 *"
+    }
+  ]
+}
