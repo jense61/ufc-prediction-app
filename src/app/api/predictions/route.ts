@@ -95,7 +95,7 @@ export async function POST(req: Request) {
               fightId: pick.fightId
             }
           },
-          data: {
+          update: {
             predictedWinner: pick.predictedWinner
           },
           create: {
