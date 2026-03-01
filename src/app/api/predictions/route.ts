@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getServerAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { nowInBrussels } from "@/lib/time";
+import { isPredictionLocked } from "@/lib/time";
 
 const submitSchema = z.object({
   eventId: z.string().min(1),
@@ -61,9 +61,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Event not found." }, { status: 404 });
     }
 
-    if (event.isCompleted || nowInBrussels() >= event.date) {
+    if (event.isCompleted || isPredictionLocked(event.date)) {
       return NextResponse.json(
-        { ok: false, error: "Predictions are locked for this event." },
+        { ok: false, error: "Predictions are locked 24 hours before event start." },
         { status: 400 }
       );
     }
@@ -86,26 +86,19 @@ export async function POST(req: Request) {
       }
     }
 
-    const alreadySubmitted = await prisma.prediction.findFirst({
-      where: {
-        userId: session.user.id,
-        fight: {
-          eventId
-        }
-      }
-    });
-
-    if (alreadySubmitted) {
-      return NextResponse.json(
-        { ok: false, error: "Predictions already submitted. Edits are disabled." },
-        { status: 409 }
-      );
-    }
-
     await prisma.$transaction(async (tx) => {
       for (const pick of picks) {
-        await tx.prediction.create({
+        await tx.prediction.upsert({
+          where: {
+            userId_fightId: {
+              userId: session.user.id,
+              fightId: pick.fightId
+            }
+          },
           data: {
+            predictedWinner: pick.predictedWinner
+          },
+          create: {
             userId: session.user.id,
             fightId: pick.fightId,
             predictedWinner: pick.predictedWinner

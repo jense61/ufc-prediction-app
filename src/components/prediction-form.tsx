@@ -31,10 +31,14 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [hasSubmittedState, setHasSubmittedState] = useState(hasSubmitted);
+  const [isEditing, setIsEditing] = useState(!hasSubmitted);
+
+  const canSelect = !isLocked && (!hasSubmittedState || isEditing);
 
   const canSubmit = useMemo(() => {
-    return !isLocked && !hasSubmitted && fights.every((fight) => Boolean(picks[fight.id]));
-  }, [fights, hasSubmitted, isLocked, picks]);
+    return !isLocked && (!hasSubmittedState || isEditing) && fights.every((fight) => Boolean(picks[fight.id]));
+  }, [fights, hasSubmittedState, isEditing, isLocked, picks]);
 
   const onSelect = (fightId: string, fighter: string) => {
     setPicks((prev) => ({ ...prev, [fightId]: fighter }));
@@ -69,11 +73,29 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
       return;
     }
 
-    setSuccess("Predictions submitted successfully. Edits are now locked.");
+    const wasEditingExisting = hasSubmittedState;
+    setHasSubmittedState(true);
+    setIsEditing(false);
+    setSuccess(wasEditingExisting ? "Predictions updated successfully." : "Predictions submitted successfully.");
+  };
+
+  const onStartEditing = () => {
+    setError(null);
+    setSuccess(null);
+    setIsEditing(true);
   };
 
   return (
     <div className="space-y-6">
+      {hasSubmittedState && !isLocked && !isEditing ? (
+        <div className="flex items-center justify-between gap-3 border border-zinc-800 p-3">
+          <p className="text-sm text-zinc-300">You already submitted predictions. You can still edit them until 24 hours before event start.</p>
+          <button type="button" className="ufc-button" onClick={onStartEditing}>
+            Edit Picks
+          </button>
+        </div>
+      ) : null}
+
       {fights.map((fight) => (
         <div key={fight.id} className="ufc-panel p-4">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -86,7 +108,7 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
           <div className="grid gap-4 md:grid-cols-2">
             <button
               type="button"
-              disabled={isLocked || hasSubmitted}
+              disabled={!canSelect}
               onClick={() => onSelect(fight.id, fight.fighter1Name)}
               className={`border p-3 text-left transition sm:p-4 ${
                 picks[fight.id] === fight.fighter1Name
@@ -103,7 +125,7 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
 
             <button
               type="button"
-              disabled={isLocked || hasSubmitted}
+              disabled={!canSelect}
               onClick={() => onSelect(fight.id, fight.fighter2Name)}
               className={`border p-3 text-left transition sm:p-4 ${
                 picks[fight.id] === fight.fighter2Name
@@ -124,12 +146,13 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
       {error ? <p className="text-sm text-ufc-red">{error}</p> : null}
       {success ? <p className="text-sm text-emerald-400">{success}</p> : null}
 
-      <button className="ufc-button w-full" disabled={!canSubmit || loading} onClick={onSubmit}>
-        {loading ? "Submitting..." : "Submit All Predictions"}
-      </button>
-      {isLocked ? <p className="text-sm text-zinc-400">Predictions are locked because event time has passed.</p> : null}
-      {hasSubmitted ? <p className="text-sm text-zinc-400">You already submitted predictions for this event.</p> : null}
-      {hasSubmitted ? <p className="text-sm text-zinc-400">Your submitted picks are highlighted below.</p> : null}
+      {!hasSubmittedState || isEditing ? (
+        <button className="ufc-button w-full" disabled={!canSubmit || loading} onClick={onSubmit}>
+          {loading ? "Submitting..." : hasSubmittedState ? "Save Updated Picks" : "Submit All Predictions"}
+        </button>
+      ) : null}
+      {isLocked ? <p className="text-sm text-zinc-400">Predictions are locked 24 hours before event start.</p> : null}
+      {hasSubmittedState ? <p className="text-sm text-zinc-400">Your submitted picks are highlighted below.</p> : null}
     </div>
   );
 }

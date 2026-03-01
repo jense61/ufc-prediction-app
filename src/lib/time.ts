@@ -1,4 +1,4 @@
-import { addDays, isAfter, isBefore } from "date-fns";
+import { addDays, isAfter, isBefore, subDays } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
 export const BRUSSELS_TZ = "Europe/Brussels";
@@ -12,3 +12,7 @@ export const isWithinNextDaysBrussels = (date: Date, days: number) => {
 
   return isAfter(target, now) && isBefore(target, max);
 };
+
+export const getPredictionEditDeadline = (eventDate: Date) => subDays(eventDate, 1);
+
+export const isPredictionLocked = (eventDate: Date) => nowInBrussels() >= getPredictionEditDeadline(eventDate);

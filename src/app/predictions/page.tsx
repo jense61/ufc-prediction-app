@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { PredictionForm } from "@/components/prediction-form";
 import { getServerAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { nowInBrussels } from "@/lib/time";
+import { isPredictionLocked } from "@/lib/time";
 
 export default async function PredictionsPage() {
   const session = await getServerAuthSession();
@@ -40,7 +40,7 @@ export default async function PredictionsPage() {
     existingPredictions.map((prediction) => [prediction.fightId, prediction.predictedWinner])
   );
 
-  const isLocked = nowInBrussels() >= event.date;
+  const isLocked = isPredictionLocked(event.date);
 
   return (
     <section className="space-y-6">
