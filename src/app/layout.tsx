@@ -9,13 +9,13 @@ import "@/app/globals.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "UFC Prediction App",
+  title: "UFC Fight Prophet",
   description: "Predict outcomes for numbered UFC events",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "UFC Predictions"
+    title: "UFC Fight Prophet"
   }
 };
 
@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           ) : null}
           <footer className="border-t border-ufc-red/30 px-4 py-6 text-center text-xs uppercase tracking-wider leading-relaxed text-zinc-400">
-            Built for numbered UFC event predictions • <Link href="/leaderboard">View Leaderboard</Link>
+            UFC Fight Prophet • <Link href="/leaderboard">View Leaderboard</Link>
           </footer>
         </Providers>
       </body>

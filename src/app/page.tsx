@@ -12,7 +12,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <section className="ufc-panel bg-gradient-to-r from-black via-zinc-900 to-black p-5 sm:p-8">
-        <h1 className="font-display text-3xl uppercase text-ufc-red sm:text-4xl md:text-5xl">UFC Fight Pick League</h1>
+        <h1 className="font-display text-3xl uppercase text-ufc-red sm:text-4xl md:text-5xl">UFC Fight Prophet</h1>
         <p className="mt-3 max-w-2xl text-zinc-300">
           Predict main card outcomes for numbered UFC events. Lock your picks before fight night and compete on
           accuracy.

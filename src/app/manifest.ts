@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "UFC Prediction App",
-    short_name: "UFC Picks",
+    name: "UFC Fight Prophet",
+    short_name: "Fight Prophet",
     description: "Predict outcomes and track UFC event results.",
     start_url: "/",
     display: "standalone",

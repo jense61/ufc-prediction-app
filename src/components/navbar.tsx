@@ -8,32 +8,33 @@ export function Navbar() {
 
   return (
     <nav className="border-b border-ufc-red/50 bg-black/50">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
-        <Link href="/" className="font-display text-lg leading-tight text-ufc-red sm:text-xl">
-          UFC PREDICTIONS
-        </Link>
-
-        <div className="flex w-full flex-wrap items-center justify-start gap-2 text-xs uppercase tracking-wide sm:w-auto sm:justify-end sm:gap-4 sm:text-sm">
-          <Link href="/predictions" className="hover:text-ufc-red">
+      <div className="mx-auto max-w-6xl px-2 py-3 sm:px-4 sm:py-4">
+        <div className="grid grid-cols-5 items-center gap-1 text-[10px] uppercase tracking-wide sm:text-sm">
+          <Link href="/predictions" className="inline-flex w-full items-center justify-center px-1 py-1 hover:text-ufc-red">
             Predictions
           </Link>
-          <Link href="/leaderboard" className="hover:text-ufc-red">
+          <Link href="/leaderboard" className="inline-flex w-full items-center justify-center px-1 py-1 hover:text-ufc-red">
             Leaderboard
           </Link>
-          <Link href="/history" className="hover:text-ufc-red">
+
+          <Link href="/" className="text-center font-display text-[11px] normal-case leading-tight text-ufc-red sm:text-lg">
+            UFC Fight Prophet
+          </Link>
+
+          <Link href="/history" className="inline-flex w-full items-center justify-center px-1 py-1 hover:text-ufc-red">
             History
           </Link>
 
           {data?.user ? (
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="border border-ufc-red px-2 py-1 text-xs hover:bg-ufc-red sm:px-3 sm:text-sm"
+              className="inline-flex w-full items-center justify-center border border-ufc-red px-1 py-1 hover:bg-ufc-red"
             >
-              Logout
+              LOGOUT
             </button>
           ) : (
-            <Link href="/login" className="border border-ufc-red px-2 py-1 text-xs hover:bg-ufc-red sm:px-3 sm:text-sm">
-              Login
+            <Link href="/login" className="inline-flex w-full items-center justify-center border border-ufc-red px-1 py-1 hover:bg-ufc-red">
+              LOGIN
             </Link>
           )}
         </div>

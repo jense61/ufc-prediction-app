@@ -1,16 +1,12 @@
 "use client";
 
-import type { Route } from "next";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const params = useSearchParams();
-  const callbackUrl = params.get("callbackUrl") ?? "/predictions";
-  const safeCallbackUrl = callbackUrl.startsWith("/") ? callbackUrl : "/predictions";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +31,7 @@ export default function LoginPage() {
       return;
     }
 
-    router.push(safeCallbackUrl as Route);
+    router.push("/predictions");
   };
 
   return (
