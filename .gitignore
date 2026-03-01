@@ -6,3 +6,5 @@ coverage
 *.log
 prisma/dev.db
 package-lock.json
+.vercel
+.env*.local
