@@ -90,9 +90,6 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
       {hasSubmittedState && !isLocked && !isEditing ? (
         <div className="flex items-center justify-between gap-3 border border-zinc-800 p-3">
           <p className="text-sm text-zinc-300">You already submitted predictions. You can still edit them until 24 hours before event start.</p>
-          <button type="button" className="ufc-button" onClick={onStartEditing}>
-            Edit Picks
-          </button>
         </div>
       ) : null}
 
@@ -145,6 +142,12 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
 
       {error ? <p className="text-sm text-ufc-red">{error}</p> : null}
       {success ? <p className="text-sm text-emerald-400">{success}</p> : null}
+
+      {!isLocked && hasSubmittedState && !isEditing ? (
+        <button className="ufc-button w-full" onClick={onStartEditing}>
+          Edit Picks
+        </button>
+      ) : null}
 
       {!hasSubmittedState || isEditing ? (
         <button className="ufc-button w-full" disabled={!canSubmit || loading} onClick={onSubmit}>
