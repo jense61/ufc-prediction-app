@@ -81,3 +81,9 @@ model AppState {
   value     String
   updatedAt DateTime @updatedAt
 }
+
+model DatabaseKeepalive {
+  id        String   @id @default(cuid())
+  randomValue Int
+  createdAt DateTime @default(now())
+}
