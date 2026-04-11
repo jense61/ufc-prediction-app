@@ -29,7 +29,7 @@ export function Countdown({ targetDate }: Props) {
 
   return (
     <div>
-      <p className="text-sm uppercase tracking-wide">{diff > 0 ? `${formatMs(diff)}` : "Predictions Locked"}</p>
+      <p className="text-sm uppercase tracking-wide text-zinc-300">{diff > 0 ? `${formatMs(diff)}` : "Predictions Locked"}</p>
     </div>
   );
 }

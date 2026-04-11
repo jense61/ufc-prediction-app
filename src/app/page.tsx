@@ -29,9 +29,8 @@ export default async function HomePage() {
           <div className="ufc-panel p-5 sm:p-6">
             <p className="text-xs uppercase text-zinc-400">Upcoming Event</p>
             <h2 className="mt-2 break-words font-display text-2xl text-ufc-red sm:text-3xl">{event.name}</h2>
-            <p className="mt-2 text-zinc-300">{event.location}</p>
             <p className="mt-2 text-zinc-300">
-              {event.date.toLocaleDateString("en-US", {
+              {event.location} · {event.date.toLocaleDateString("en-US", {
                 weekday: "long",
                 month: "long",
                 day: "numeric",
