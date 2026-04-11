@@ -78,6 +78,7 @@ export default async function LeaderboardPage() {
                   <p className="text-xs uppercase tracking-wide text-zinc-400">Rank #{index + 1}</p>
                   <Link href={`/leaderboard/${row.userId}` as Route} className="mt-1 block text-lg font-semibold text-zinc-100 hover:text-ufc-red">
                     {row.displayName}
+                    {index === 0 ? <span aria-label="Top rank" className="ml-2 text-ufc-red">👑</span> : null}
                   </Link>
                   <p className="mt-2 text-sm text-zinc-300">Correct picks: {row.correct}</p>
                 </div>
@@ -113,6 +114,7 @@ export default async function LeaderboardPage() {
                     <div className="space-y-2">
                       <Link href={`/leaderboard/${row.userId}` as Route} className="hover:text-ufc-red">
                         {row.displayName}
+                        {index === 0 ? <span aria-label="Top rank" className="ml-2 text-ufc-red">👑</span> : null}
                       </Link>
                       <Link
                         href={`/leaderboard/${row.userId}` as Route}
