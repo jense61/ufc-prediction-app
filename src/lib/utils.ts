@@ -13,5 +13,9 @@ export const normalizeEventName = (value: string) =>
 
 export const isNumberedUfcEvent = (value: string) => {
   const normalized = normalizeEventName(value);
-  return /^UFC\s+\d+(\s*:.+)?$/.test(normalized);
+  const isNumbered = /^UFC\s+\d+(\s*:.+)?$/.test(normalized);
+  const isFreedom = /^UFC\s+FREEDOM(\s|:|$)/.test(normalized);
+
+  return isNumbered || isFreedom;
+
 };
