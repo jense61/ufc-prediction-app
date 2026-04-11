@@ -89,7 +89,7 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
     <div className="space-y-6">
       {hasSubmittedState && !isLocked && !isEditing ? (
         <div className="flex items-center justify-between gap-3 border border-zinc-800 p-3">
-          <p className="text-sm text-zinc-300">You already submitted predictions. You can still edit them until 24 hours before event start.</p>
+          <p className="text-sm text-zinc-300">You already submitted predictions. You can still edit them until the day before the event.</p>
         </div>
       ) : null}
 
@@ -154,7 +154,7 @@ export function PredictionForm({ eventId, fights, isLocked, hasSubmitted, initia
           {loading ? "Submitting..." : hasSubmittedState ? "Save Updated Picks" : "Submit All Predictions"}
         </button>
       ) : null}
-      {isLocked ? <p className="text-sm text-zinc-400">Predictions are locked 24 hours before event start.</p> : null}
+      {isLocked ? <p className="text-sm text-zinc-400">Predictions are locked from the day of the event onwards.</p> : null}
       {hasSubmittedState ? <p className="text-sm text-zinc-400">Your submitted picks are highlighted above.</p> : null}
     </div>
   );

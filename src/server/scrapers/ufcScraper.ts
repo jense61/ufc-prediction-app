@@ -64,7 +64,7 @@ const toBrusselsEventDateTime = (listedDate: Date) => {
   const month = String(listedDay.getUTCMonth() + 1).padStart(2, "0");
   const day = String(listedDay.getUTCDate()).padStart(2, "0");
 
-  return fromZonedTime(`${year}-${month}-${day}T03:00:00`, BRUSSELS_TZ);
+  return fromZonedTime(`${year}-${month}-${day}T00:00:00`, BRUSSELS_TZ);
 };
 
 type CheerioInput = Parameters<ReturnType<typeof load>>[0];

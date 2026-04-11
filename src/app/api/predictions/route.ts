@@ -63,7 +63,7 @@ export async function POST(req: Request) {
 
     if (event.isCompleted || isPredictionLocked(event.date)) {
       return NextResponse.json(
-        { ok: false, error: "Predictions are locked 24 hours before event start." },
+        { ok: false, error: "Predictions are locked from the day of the event onwards." },
         { status: 400 }
       );
     }

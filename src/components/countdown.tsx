@@ -29,11 +29,11 @@ export function Countdown({ targetDate }: Props) {
 
   return (
     <div className="ufc-panel p-4">
-      <p className="text-xs uppercase text-zinc-400">Event Time (Europe/Brussels)</p>
+      <p className="text-xs uppercase text-zinc-400">Event Date</p>
       <p className="mt-1 text-lg font-bold text-ufc-red">
-        {formatInTimeZone(target, "Europe/Brussels", "EEE d MMM yyyy, HH:mm")}
+        {formatInTimeZone(target, "Europe/Brussels", "EEE d MMM yyyy")}
       </p>
-      <p className="mt-2 text-sm uppercase tracking-wide">{diff > 0 ? formatMs(diff) : "Predictions Locked"}</p>
+      <p className="mt-2 text-sm uppercase tracking-wide">{diff > 0 ? `${formatMs(diff)} until Fight Day` : "Predictions Locked"}</p>
     </div>
   );
 }
