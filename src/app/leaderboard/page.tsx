@@ -85,9 +85,9 @@ export default async function LeaderboardPage() {
                   <p className="text-sm text-zinc-300">{row.accuracy.toFixed(2)}%</p>
                   <Link
                     href={`/leaderboard/${row.userId}` as Route}
-                    className="inline-flex items-center justify-center rounded-none border border-ufc-red px-3 py-2 text-xs uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
+                    className="inline-flex items-center justify-center rounded-none border border-ufc-red px-2 py-1 text-[10px] uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
                   >
-                    View History →;
+                    View History →
                   </Link>
                 </div>
               </div>
@@ -116,9 +116,9 @@ export default async function LeaderboardPage() {
                       </Link>
                       <Link
                         href={`/leaderboard/${row.userId}` as Route}
-                        className="inline-flex items-center justify-center rounded-none border border-ufc-red px-3 py-2 text-[10px] uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
+                        className="inline-flex items-center justify-center rounded-none border border-ufc-red px-2 py-1 text-[10px] uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
                       >
-                        VIEW HISTORY =&gt;
+                        View History →
                       </Link>
                     </div>
                   </td>
