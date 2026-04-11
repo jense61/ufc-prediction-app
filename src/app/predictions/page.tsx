@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
+import { formatInTimeZone } from "date-fns-tz";
 import { PredictionForm } from "@/components/prediction-form";
 import { getServerAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { isPredictionLocked } from "@/lib/time";
+import { BRUSSELS_TZ, isPredictionLocked } from "@/lib/time";
 
 export default async function PredictionsPage() {
   const session = await getServerAuthSession();
@@ -41,11 +42,13 @@ export default async function PredictionsPage() {
   );
 
   const isLocked = isPredictionLocked(event.date);
+  const eventDateLabel = formatInTimeZone(event.date, BRUSSELS_TZ, "EEEE d MMM yyyy");
 
   return (
     <section className="space-y-6">
       <div className="ufc-panel p-6">
         <h1 className="break-words font-display text-3xl text-ufc-red md:text-4xl">{event.name}</h1>
+        <p className="mt-2 text-sm uppercase tracking-wide text-zinc-400">{eventDateLabel}</p>
         <p className="mt-2 text-zinc-300">{event.location}</p>
       </div>
       <PredictionForm

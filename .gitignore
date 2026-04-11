@@ -8,3 +8,7 @@ prisma/dev.db
 package-lock.json
 .vercel
 .env*.local
+.claude/
+.mcp.json
+desktop.ini
+install-claude-code.sh

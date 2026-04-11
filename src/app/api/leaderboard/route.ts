@@ -58,8 +58,8 @@ export async function GET() {
     });
 
     rows.sort((a, b) => {
-      if (b.totalScore !== a.totalScore) {
-        return b.totalScore - a.totalScore;
+      if (b.correctPicks !== a.correctPicks) {
+        return b.correctPicks - a.correctPicks;
       }
       if (b.accuracy !== a.accuracy) {
         return b.accuracy - a.accuracy;

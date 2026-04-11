@@ -48,16 +48,18 @@ export default async function LeaderboardPage() {
       return {
         userId: user.id,
         username: user.username,
-        score: user.totalScore,
         correct,
         accuracy
       };
     })
     .sort((a, b) => {
-      if (b.score !== a.score) {
-        return b.score - a.score;
+      if (b.correct !== a.correct) {
+        return b.correct - a.correct;
       }
-      return b.accuracy - a.accuracy;
+      if (b.accuracy !== a.accuracy) {
+        return b.accuracy - a.accuracy;
+      }
+      return a.username.localeCompare(b.username);
     });
 
   return (

@@ -1,7 +1,8 @@
 import { differenceInYears, parse } from "date-fns";
 import { load } from "cheerio";
+import { fromZonedTime } from "date-fns-tz";
 import puppeteer from "puppeteer";
-import { isWithinNextDaysBrussels } from "@/lib/time";
+import { BRUSSELS_TZ, isWithinNextDaysBrussels } from "@/lib/time";
 import { isNumberedUfcEvent } from "@/lib/utils";
 import type {
   ScrapedEventResults,
@@ -19,7 +20,7 @@ type UpcomingEventCandidate = {
 
 const UFC_STATS_UPCOMING_URL = "http://ufcstats.com/statistics/events/upcoming";
 const UFC_STATS_COMPLETED_URL = "http://ufcstats.com/statistics/events/completed?page=all";
-const onlyNumbered = (process.env.ONLY_NUMBERED ?? "true").toLowerCase() !== "false";
+const onlyNumbered = (process.env.ONLY_NUMBERED ?? "true").trim().toLowerCase() !== "false";
 
 const UNKNOWN = "Unknown";
 
@@ -55,6 +56,17 @@ const getFirstParsableDateFromRow = (cells: string[]) => {
   return null;
 };
 
+const toBrusselsEventDateTime = (listedDate: Date) => {
+  const listedDay = new Date(Date.UTC(listedDate.getFullYear(), listedDate.getMonth(), listedDate.getDate()));
+  listedDay.setUTCDate(listedDay.getUTCDate() + 1);
+
+  const year = listedDay.getUTCFullYear();
+  const month = String(listedDay.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(listedDay.getUTCDate()).padStart(2, "0");
+
+  return fromZonedTime(`${year}-${month}-${day}T03:00:00`, BRUSSELS_TZ);
+};
+
 type CheerioInput = Parameters<ReturnType<typeof load>>[0];
 
 const parseEventCandidateFromRow = ($: ReturnType<typeof load>, row: CheerioInput) => {
@@ -71,7 +83,7 @@ const parseEventCandidateFromRow = ($: ReturnType<typeof load>, row: CheerioInpu
   const explicitDate = explicitDateText ? tryParseDateLoose(explicitDateText) : null;
 
   if (explicitDate) {
-    return { name, date: explicitDate, url };
+    return { name, date: toBrusselsEventDateTime(explicitDate), url };
   }
 
   const firstCellText = cleanText(rowNode.find("td").first().text());
@@ -80,7 +92,7 @@ const parseEventCandidateFromRow = ($: ReturnType<typeof load>, row: CheerioInpu
     return null;
   }
 
-  return { name, date: fallbackDate, url };
+  return { name, date: toBrusselsEventDateTime(fallbackDate), url };
 };
 
 const isSpecialOutcome = (winner: string | null, method: string) => {
@@ -97,7 +109,7 @@ const isWinnerToken = (value: string) => {
 };
 
 const cleanText = (value: string) => value.replace(/\s+/g, " ").trim();
-const shouldIncludeEvent = (eventName: string) => !onlyNumbered || isNumberedUfcEvent(eventName);
+const shouldIncludeEvent = (eventName: string) => onlyNumbered ? isNumberedUfcEvent(eventName) : true;
 
 async function fetchHtml(url: string): Promise<string> {
   try {

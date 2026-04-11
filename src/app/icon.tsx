@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const size = {
   width: 512,
@@ -6,8 +8,12 @@ export const size = {
 };
 
 export const contentType = "image/png";
+export const runtime = "nodejs";
 
-export default function Icon() {
+export default async function Icon() {
+  const logo = await readFile(join(process.cwd(), "public", "logo.png"));
+  const logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -17,30 +23,18 @@ export default function Icon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#c1121f",
-          backgroundImage:
-            "radial-gradient(120% 70% at 50% 100%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 60%), linear-gradient(180deg, #d11a28 0%, #b50f1c 100%)",
-          color: "#0a0a0a",
-          fontSize: 106,
-          fontWeight: 900,
-          letterSpacing: -7,
-          fontStyle: "italic",
-          textShadow:
-            "0 1px 0 rgba(0,0,0,0.8), 0 2px 0 rgba(0,0,0,0.65), 1px 0 0 rgba(0,0,0,0.55), -1px 0 0 rgba(0,0,0,0.55)",
-          fontFamily: "Times New Roman"
+          backgroundColor: "transparent"
         }}
       >
-        <div
+        <img
+          src={logoDataUri}
+          alt="UFC Fight Prophet"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            lineHeight: 0.84
+            width: "100%",
+            height: "100%",
+            objectFit: "contain"
           }}
-        >
-          <span>Fight</span>
-          <span>Prophet</span>
-        </div>
+        />
       </div>
     ),
     size
