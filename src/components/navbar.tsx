@@ -13,15 +13,12 @@ export function Navbar() {
           <span className="font-display text-3xl uppercase text-ufc-red sm:text-4xl">UFC Fight Prophet</span>
         </Link>
 
-        <div className="mt-3 grid grid-cols-4 border border-ufc-red/70 text-[10px] uppercase tracking-wide sm:text-sm">
-          <Link href="/predictions" className="inline-flex w-full items-center justify-center border-r border-ufc-red/70 px-1 py-2 hover:bg-ufc-red/20 hover:text-ufc-red">
-            Predictions
-          </Link>
+        <div className="mt-3 grid grid-cols-3 border border-ufc-red/70 text-[10px] uppercase tracking-wide sm:text-sm">
           <Link href="/leaderboard" className="inline-flex w-full items-center justify-center border-r border-ufc-red/70 px-1 py-2 hover:bg-ufc-red/20 hover:text-ufc-red">
             Leaderboard
           </Link>
-          <Link href="/history" className="inline-flex w-full items-center justify-center border-r border-ufc-red/70 px-1 py-2 hover:bg-ufc-red/20 hover:text-ufc-red">
-            History
+          <Link href="/predictions" className="inline-flex w-full items-center justify-center border-r border-ufc-red/70 px-1 py-2 hover:bg-ufc-red/20 hover:text-ufc-red">
+            Predictions
           </Link>
           {data?.user ? (
             <button onClick={() => signOut({ callbackUrl: "/" })} className="inline-flex w-full items-center justify-center px-1 py-2 hover:bg-ufc-red/20 hover:text-ufc-red">

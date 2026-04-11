@@ -28,7 +28,7 @@ export function Countdown({ targetDate }: Props) {
   const diff = target.getTime() - now.getTime();
 
   return (
-    <div className="ufc-panel p-4">
+    <div>
       <p className="text-sm uppercase tracking-wide">{diff > 0 ? `${formatMs(diff)}` : "Predictions Locked"}</p>
     </div>
   );

@@ -19,12 +19,14 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
 
   const targetUser = await prisma.user.findUnique({
     where: { id: userId },
-    select: { id: true, username: true }
+    select: { id: true, username: true, firstName: true, lastName: true }
   });
 
   if (!targetUser) {
     notFound();
   }
+
+  const displayName = targetUser.firstName && targetUser.lastName ? `${targetUser.firstName} ${targetUser.lastName}` : targetUser.username;
 
   const events = await prisma.event.findMany({
     where: {
@@ -61,7 +63,7 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
           ← Back to Leaderboard
         </Link>
         <h1 className="mt-4 font-display text-3xl text-ufc-red">Prediction History</h1>
-        <p className="mt-2 text-zinc-300">Player: {targetUser.username}</p>
+        <p className="mt-2 text-zinc-300">Player: {displayName}</p>
         <p className="mt-2 text-zinc-300">This player has not submitted any predictions yet.</p>
       </section>
     );
@@ -74,7 +76,7 @@ export default async function LeaderboardUserHistoryPage({ params }: Props) {
           ← Back to Leaderboard
         </Link>
         <h1 className="font-display text-3xl text-ufc-red md:text-4xl">Prediction History</h1>
-        <p className="text-sm uppercase tracking-wide text-zinc-300">Player: {targetUser.username}</p>
+        <p className="text-sm uppercase tracking-wide text-zinc-300">Player: {displayName}</p>
       </div>
 
       <div className="space-y-4">

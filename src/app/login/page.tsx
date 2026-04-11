@@ -27,7 +27,7 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.assign("/predictions");
+    window.location.assign("/leaderboard");
   };
 
   return (

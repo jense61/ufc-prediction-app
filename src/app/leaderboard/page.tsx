@@ -44,9 +44,11 @@ export default async function LeaderboardPage() {
       ).length;
 
       const accuracy = validPredictions.length > 0 ? (correct / validPredictions.length) * 100 : 0;
+      const displayName = user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.username;
 
       return {
         userId: user.id,
+        displayName,
         username: user.username,
         correct,
         accuracy
@@ -59,7 +61,7 @@ export default async function LeaderboardPage() {
       if (b.accuracy !== a.accuracy) {
         return b.accuracy - a.accuracy;
       }
-      return a.username.localeCompare(b.username);
+      return a.displayName.localeCompare(b.displayName);
     });
 
   return (
@@ -71,16 +73,24 @@ export default async function LeaderboardPage() {
         <div className="space-y-3 md:hidden">
           {rows.map((row, index) => (
             <div key={row.userId} className="border border-zinc-800 p-4">
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-zinc-400">Rank #{index + 1}</p>
                   <Link href={`/leaderboard/${row.userId}` as Route} className="mt-1 block text-lg font-semibold text-zinc-100 hover:text-ufc-red">
-                    {row.username}
+                    {row.displayName}
+                  </Link>
+                  <p className="mt-2 text-sm text-zinc-300">Correct picks: {row.correct}</p>
+                </div>
+                <div className="flex items-end justify-between gap-3 sm:flex-col sm:items-end">
+                  <p className="text-sm text-zinc-300">{row.accuracy.toFixed(2)}%</p>
+                  <Link
+                    href={`/leaderboard/${row.userId}` as Route}
+                    className="inline-flex items-center justify-center rounded-none border border-ufc-red px-3 py-2 text-xs uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
+                  >
+                    View History →;
                   </Link>
                 </div>
-                <p className="text-sm text-zinc-300">{row.accuracy.toFixed(2)}%</p>
               </div>
-              <p className="mt-2 text-sm text-zinc-300">Correct picks: {row.correct}</p>
             </div>
           ))}
         </div>
@@ -90,7 +100,7 @@ export default async function LeaderboardPage() {
             <thead className="bg-black/70 text-left text-xs uppercase tracking-wide text-zinc-400">
               <tr>
                 <th className="px-4 py-3">Rank</th>
-                <th className="px-4 py-3">Username</th>
+                <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Correct Picks</th>
                 <th className="px-4 py-3">Accuracy %</th>
               </tr>
@@ -100,9 +110,17 @@ export default async function LeaderboardPage() {
                 <tr key={row.userId} className="border-t border-zinc-800">
                   <td className="px-4 py-3">{index + 1}</td>
                   <td className="px-4 py-3 font-semibold">
-                    <Link href={`/leaderboard/${row.userId}` as Route} className="hover:text-ufc-red">
-                      {row.username}
-                    </Link>
+                    <div className="space-y-2">
+                      <Link href={`/leaderboard/${row.userId}` as Route} className="hover:text-ufc-red">
+                        {row.displayName}
+                      </Link>
+                      <Link
+                        href={`/leaderboard/${row.userId}` as Route}
+                        className="inline-flex items-center justify-center rounded-none border border-ufc-red px-3 py-2 text-[10px] uppercase tracking-wide text-zinc-100 hover:bg-ufc-red/20 hover:text-ufc-red"
+                      >
+                        VIEW HISTORY =&gt;
+                      </Link>
+                    </div>
                   </td>
                   <td className="px-4 py-3">{row.correct}</td>
                   <td className="px-4 py-3">{row.accuracy.toFixed(2)}%</td>
