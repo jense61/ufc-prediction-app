@@ -26,13 +26,22 @@ export default async function HomePage() {
 
       {event ? (
         <section className="grid gap-4 md:grid-cols-[2fr_1fr]">
+          <Countdown targetDate={event.date.toISOString()} />
           <div className="ufc-panel p-5 sm:p-6">
             <p className="text-xs uppercase text-zinc-400">Upcoming Numbered Event</p>
             <h2 className="mt-2 break-words font-display text-2xl text-ufc-red sm:text-3xl">{event.name}</h2>
             <p className="mt-2 text-zinc-300">{event.location}</p>
-            <p className="mt-4 text-sm uppercase">Main Card Fights: {event.fights.length}</p>
+            <div className="mt-4 space-y-2">
+              <p className="text-sm uppercase tracking-wide text-zinc-400">Main Card</p>
+              <div className="space-y-1 text-sm text-zinc-300">
+                {event.fights.map((fight) => (
+                  <p key={fight.id} className="break-words">
+                    {fight.fighter1Name} vs {fight.fighter2Name}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
-          <Countdown targetDate={event.date.toISOString()} />
         </section>
       ) : (
         <section className="ufc-panel p-6">

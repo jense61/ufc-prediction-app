@@ -13,6 +13,6 @@ export const isWithinNextDaysBrussels = (date: Date, days: number) => {
   return isAfter(target, now) && isBefore(target, max);
 };
 
-export const getPredictionEditDeadline = (eventDate: Date) => subDays(eventDate, 1);
+export const getPredictionEditDeadline = (eventDate: Date) => eventDate;
 
 export const isPredictionLocked = (eventDate: Date) => nowInBrussels() >= getPredictionEditDeadline(eventDate);
