@@ -77,7 +77,7 @@ export default async function LeaderboardPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-zinc-400">Rank #{index + 1}</p>
-                  <Link href={`/leaderboard/${row.userId}` as Route} className="mt-1 block text-lg font-semibold text-zinc-100 hover:text-ufc-red">
+                  <Link href={`/leaderboard/${row.userId}` as Route} className="mt-1 inline-flex items-center gap-2 text-lg font-semibold text-zinc-100 hover:text-ufc-red">
                     {row.displayName}
                     {index === 0 ? (
                       <Crown
@@ -118,11 +118,11 @@ export default async function LeaderboardPage() {
                   <td className="px-4 py-3">{index + 1}</td>
                   <td className="px-4 py-3 font-semibold">
                     <div className="space-y-2">
-                      <Link href={`/leaderboard/${row.userId}` as Route} className="hover:text-ufc-red">
+                      <Link href={`/leaderboard/${row.userId}` as Route} className="inline-flex items-center gap-2 hover:text-ufc-red">
                         {row.displayName}
                         {index === 0 ? (
                           <Crown
-                            className="ml-2 text-red-600 w-5 h-5 drop-shadow-[0_0_4px_rgba(255,0,0,0.6)]"
+                            className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_6px_rgba(255,215,0,0.7)]"
                             aria-label="Top rank"
                           />
                         ) : null}
