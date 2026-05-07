@@ -61,9 +61,6 @@ export async function GET() {
       if (b.correctPicks !== a.correctPicks) {
         return b.correctPicks - a.correctPicks;
       }
-      if (b.accuracy !== a.accuracy) {
-        return b.accuracy - a.accuracy;
-      }
       return a.username.localeCompare(b.username);
     });
 
