@@ -48,5 +48,30 @@ export function startSchedulers() {
     { timezone: "Europe/Brussels" }
   );
 
+  // Daily database keepalive to prevent database pausing
+  cron.schedule(
+    "0 12 * * *",
+    async () => {
+      try {
+        const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/cron/keepalive`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.CRON_SECRET}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          console.error("Database keepalive failed:", response.status);
+        } else {
+          console.log("Database keepalive successful");
+        }
+      } catch (error) {
+        console.error("Database keepalive error:", error);
+      }
+    },
+    { timezone: "Europe/Brussels" }
+  );
+
   cronStarted = true;
 }

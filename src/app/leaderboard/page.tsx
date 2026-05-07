@@ -59,9 +59,6 @@ export default async function LeaderboardPage() {
       if (b.correct !== a.correct) {
         return b.correct - a.correct;
       }
-      if (b.accuracy !== a.accuracy) {
-        return b.accuracy - a.accuracy;
-      }
       return a.displayName.localeCompare(b.displayName);
     });
 
